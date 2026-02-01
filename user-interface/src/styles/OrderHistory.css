@@ -1,0 +1,147 @@
+.order-history-main {
+    flex: 1;
+    padding: 30px 20px;
+    background: #f9f9f9;
+}
+
+.order-history-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.order-history-container h1 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.booking-item {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+}
+
+.booking-item:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+}
+
+.booking-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background-color: #f0f0f0;
+}
+
+.booking-details {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.booking-details h3 {
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.booking-address {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.booking-dates,
+.booking-guests,
+.booking-price,
+.booking-status {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.booking-dates strong,
+.booking-guests strong,
+.booking-price strong,
+.booking-status strong {
+    color: #333;
+}
+
+.booking-status {
+    display: inline-block;
+}
+
+.booking-status span {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.booking-status.pending span {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.booking-status.completed span {
+    background: #d4edda;
+    color: #155724;
+}
+
+.booking-status.rejected span {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.error-message {
+    background-color: #fee;
+    color: #c33;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.loading,
+.no-bookings {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    font-size: 16px;
+}
+
+.no-bookings {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .booking-item {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-image {
+        height: 200px;
+    }
+
+    .booking-details {
+        padding: 15px;
+    }
+
+    .booking-details h3 {
+        font-size: 16px;
+    }
+}
