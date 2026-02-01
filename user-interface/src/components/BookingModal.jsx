@@ -68,7 +68,7 @@ export default function BookingModal({ listing, onClose }) {
             };
 
             await axios.post(
-                `https://your-firebase-db.firebaseio.com/bookings.json?auth=${token}`,
+                `https://travel-website-a0b2d-default-rtdb.firebaseio.com/bookings.json?auth=${token}`,
                 bookingData
             );
 

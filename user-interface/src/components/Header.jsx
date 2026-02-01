@@ -22,7 +22,8 @@ export default function Header() {
 
                 <nav className="nav-menu">
                     <Link to="/" className="nav-link">Home</Link>
-                    <Link to="/order-history" className="nav-link">Order History</Link>
+                    <Link to="/explore" className="nav-link">Explore</Link>
+                    <Link to="/bookings" className="nav-link">My Bookings</Link>
                 </nav>
 
                 <div className="header-actions">

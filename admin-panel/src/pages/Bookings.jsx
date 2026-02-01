@@ -22,7 +22,7 @@ export default function Bookings() {
         try {
             const token = localStorage.getItem('adminToken');
             const response = await axios.get(
-                'https://your-firebase-db.firebaseio.com/bookings.json?auth=' + token
+                'https://travel-website-a0b2d-default-rtdb.firebaseio.com/bookings.json?auth=' + token
             );
             setBookings(response.data ? Object.entries(response.data).map(([key, val]) => ({ id: key, ...val })) : []);
         } catch (err) {
@@ -36,7 +36,7 @@ export default function Bookings() {
         try {
             const token = localStorage.getItem('adminToken');
             await axios.patch(
-                `https://your-firebase-db.firebaseio.com/bookings/${bookingId}.json?auth=${token}`,
+                `https://travel-website-a0b2d-default-rtdb.firebaseio.com/bookings/${bookingId}.json?auth=${token}`,
                 { status: 'completed' }
             );
             fetchBookings();
@@ -49,7 +49,7 @@ export default function Bookings() {
         try {
             const token = localStorage.getItem('adminToken');
             await axios.patch(
-                `https://your-firebase-db.firebaseio.com/bookings/${bookingId}.json?auth=${token}`,
+                `https://travel-website-a0b2d-default-rtdb.firebaseio.com/bookings/${bookingId}.json?auth=${token}`,
                 { status: 'rejected' }
             );
             fetchBookings();

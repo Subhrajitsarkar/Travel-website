@@ -26,11 +26,12 @@ export default function Details() {
     const fetchListing = async () => {
         try {
             const token = localStorage.getItem('userToken');
-            const response = await axios.get(
-                `https://your-firebase-db.firebaseio.com/hotels/${id}.json?auth=${token}`
+            const response = await fetch(
+                `https://travel-website-a0b2d-default-rtdb.firebaseio.com/hotels/${id}.json?auth=${token}`
             );
-            if (response.data) {
-                setListing({ id, ...response.data });
+            const data = await response.json();
+            if (data) {
+                setListing({ id, ...data });
             }
         } catch (err) {
             console.error('Failed to fetch listing');
