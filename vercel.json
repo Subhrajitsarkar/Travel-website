@@ -1,0 +1,6 @@
+{
+    "buildCommand": "npm install --prefix user-interface && npm run build --prefix user-interface",
+    "outputDirectory": "user-interface/dist",
+    "installCommand": "npm install --prefix user-interface",
+    "framework": "vite"
+}
