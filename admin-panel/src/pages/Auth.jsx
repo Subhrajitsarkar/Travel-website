@@ -17,7 +17,6 @@ export default function Auth() {
     useEffect(() => {
         if (!FIREBASE_API_KEY) {
             setError("Configuration error: Firebase API Key is missing.");
-            console.error("VITE_FIREBASE_API_KEY is not defined. Make sure to create a .env file and add the key.");
             return;
         }
 
@@ -49,7 +48,6 @@ export default function Auth() {
             const data = await response.json();
 
             if (!response.ok) {
-                console.log(data)
                 throw new Error(data.error?.message || 'Sign up failed');
             }
 
@@ -85,7 +83,6 @@ export default function Auth() {
             const data = await response.json();
 
             if (!response.ok) {
-                console.log(data)
                 throw new Error(data.error?.message || 'Login failed');
             }
 

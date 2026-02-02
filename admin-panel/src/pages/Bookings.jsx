@@ -22,13 +22,11 @@ export default function Bookings() {
     const fetchBookings = async () => {
         try {
             const token = localStorage.getItem('adminToken');
-            console.log('Fetching bookings with token:', token);
             const response = await axios.get(
                 `${FIREBASE_DB_URL}/bookings.json?auth=${token}`
             );
             setBookings(response.data ? Object.entries(response.data).map(([key, val]) => ({ id: key, ...val })) : []);
         } catch (err) {
-            console.error('Firebase Bookings Error:', err.response?.data || err.message);
             setError('Failed to fetch bookings: ' + (err.response?.data?.error || err.message));
         } finally {
             setLoading(false);

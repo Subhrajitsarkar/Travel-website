@@ -42,7 +42,6 @@ export default function ManageListings() {
             );
             setHotels(response.data ? Object.entries(response.data).map(([key, val]) => ({ id: key, ...val })) : []);
         } catch (err) {
-            console.error('Firebase Error:', err.response?.data || err.message);
         }
     };
 
@@ -56,7 +55,6 @@ export default function ManageListings() {
                 setCategories(Object.values(response.data));
             }
         } catch (err) {
-            console.error('Failed to fetch categories');
         }
     };
 

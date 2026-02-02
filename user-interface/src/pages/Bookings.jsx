@@ -35,7 +35,6 @@ const Bookings = () => {
                 setLoading(false);
             })
             .catch(error => {
-                console.error('Error fetching bookings:', error);
                 setLoading(false);
             });
     }, [navigate]);

@@ -35,7 +35,6 @@ export default function Details() {
                 setListing({ id, ...data });
             }
         } catch (err) {
-            console.error('Failed to fetch listing');
         } finally {
             setLoading(false);
         }

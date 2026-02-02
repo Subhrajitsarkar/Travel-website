@@ -42,7 +42,6 @@ export default function Listings() {
             })).filter(h => h.availability !== false) : [];
             setListings(data);
         } catch (err) {
-            console.error('Failed to fetch listings');
         } finally {
             setLoading(false);
         }
@@ -60,7 +59,6 @@ export default function Listings() {
                 setCategories(['All']);
             }
         } catch (err) {
-            console.error('Failed to fetch categories');
             setCategories(['All']);
         }
     };

@@ -17,7 +17,6 @@ export default function Auth() {
     useEffect(() => {
         if (!FIREBASE_API_KEY) {
             setError("Configuration error: Firebase API Key is missing.");
-            console.error("VITE_FIREBASE_API_KEY is not defined. Make sure to create a .env file in the root and add the key.");
             return;
         }
 

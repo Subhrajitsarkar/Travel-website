@@ -27,7 +27,6 @@ export default function Home() {
             );
             setHotels(response.data ? Object.entries(response.data).map(([key, val]) => ({ id: key, ...val })) : []);
         } catch (err) {
-            console.error('Firebase Error Details:', err.response?.data || err.message);
             setError('Failed to fetch hotels: ' + (err.response?.data?.error || err.message));
         } finally {
             setLoading(false);

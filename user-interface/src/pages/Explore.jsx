@@ -41,7 +41,6 @@ const Explore = () => {
                 setLoading(false);
             })
             .catch(error => {
-                console.error('Error fetching hotels:', error);
                 setLoading(false);
             });
     }, [navigate]);

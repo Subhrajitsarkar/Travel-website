@@ -32,7 +32,6 @@ const Home = () => {
                 setLoading(false);
             })
             .catch(error => {
-                console.error('Error fetching hotels:', error);
                 setLoading(false);
             });
     }, [navigate]);
