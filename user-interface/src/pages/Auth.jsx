@@ -11,15 +11,21 @@ export default function Auth() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const FIREBASE_API_KEY = 'YOUR_FIREBASE_API_KEY';
+    const FIREBASE_API_KEY = import.meta.env.VITE_FIREBASE_API_KEY;
     const AUTH_URL = `https://identitytoolkit.googleapis.com/v1/accounts`;
 
     useEffect(() => {
+        if (!FIREBASE_API_KEY) {
+            setError("Configuration error: Firebase API Key is missing.");
+            console.error("VITE_FIREBASE_API_KEY is not defined. Make sure to create a .env file in the root and add the key.");
+            return;
+        }
+
         const token = localStorage.getItem('userToken');
         if (token) {
             navigate('/');
         }
-    }, [navigate]);
+    }, [navigate, FIREBASE_API_KEY]);
 
     const handleSignUp = async (e) => {
         e.preventDefault();

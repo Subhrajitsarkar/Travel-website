@@ -14,6 +14,7 @@ export default function Listings() {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
+    const FIREBASE_DB_URL = import.meta.env.VITE_FIREBASE_DB_URL;
 
     useEffect(() => {
         const token = localStorage.getItem('userToken');
@@ -33,7 +34,7 @@ export default function Listings() {
         try {
             const token = localStorage.getItem('userToken');
             const response = await axios.get(
-                'https://your-firebase-db.firebaseio.com/hotels.json?auth=' + token
+                `${FIREBASE_DB_URL}/hotels.json?auth=${token}`
             );
             const data = response.data ? Object.entries(response.data).map(([key, val]) => ({
                 id: key,
@@ -51,7 +52,7 @@ export default function Listings() {
         try {
             const token = localStorage.getItem('userToken');
             const response = await axios.get(
-                'https://your-firebase-db.firebaseio.com/categories.json?auth=' + token
+                `${FIREBASE_DB_URL}/categories.json?auth=${token}`
             );
             if (response.data) {
                 setCategories(['All', ...Object.values(response.data)]);

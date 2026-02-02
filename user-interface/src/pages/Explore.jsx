@@ -13,6 +13,7 @@ const Explore = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const FIREBASE_DB_URL = import.meta.env.VITE_FIREBASE_DB_URL;
 
     useEffect(() => {
         const token = localStorage.getItem('userToken');
@@ -22,7 +23,7 @@ const Explore = () => {
         }
 
         // Fetch hotels
-        fetch(`https://travel-website-a0b2d-default-rtdb.firebaseio.com/hotels.json?auth=${token}`)
+        fetch(`${FIREBASE_DB_URL}/hotels.json?auth=${token}`)
             .then(response => response.json())
             .then(data => {
                 if (data && typeof data === 'object') {

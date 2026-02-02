@@ -12,6 +12,7 @@ export default function BookingModal({ listing, onClose }) {
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const FIREBASE_DB_URL = import.meta.env.VITE_FIREBASE_DB_URL;
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -68,7 +69,7 @@ export default function BookingModal({ listing, onClose }) {
             };
 
             await axios.post(
-                `https://travel-website-a0b2d-default-rtdb.firebaseio.com/bookings.json?auth=${token}`,
+                `${FIREBASE_DB_URL}/bookings.json?auth=${token}`,
                 bookingData
             );
 

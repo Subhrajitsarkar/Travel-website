@@ -8,6 +8,7 @@ const Bookings = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const FIREBASE_DB_URL = import.meta.env.VITE_FIREBASE_DB_URL;
 
     useEffect(() => {
         const token = localStorage.getItem('userToken');
@@ -19,7 +20,7 @@ const Bookings = () => {
         }
 
         // Fetch all bookings and filter by user email
-        fetch(`https://travel-website-a0b2d-default-rtdb.firebaseio.com/bookings.json?auth=${token}`)
+        fetch(`${FIREBASE_DB_URL}/bookings.json?auth=${token}`)
             .then(response => response.json())
             .then(data => {
                 if (data && typeof data === 'object') {

@@ -8,6 +8,7 @@ export default function Home() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const FIREBASE_DB_URL = import.meta.env.VITE_FIREBASE_DB_URL;
 
     useEffect(() => {
         const token = localStorage.getItem('adminToken');
@@ -22,11 +23,12 @@ export default function Home() {
         try {
             const token = localStorage.getItem('adminToken');
             const response = await axios.get(
-                'https://your-firebase-db.firebaseio.com/hotels.json?auth=' + token
+                `${FIREBASE_DB_URL}/hotels.json?auth=${token}`
             );
             setHotels(response.data ? Object.entries(response.data).map(([key, val]) => ({ id: key, ...val })) : []);
         } catch (err) {
-            setError('Failed to fetch hotels');
+            console.error('Firebase Error Details:', err.response?.data || err.message);
+            setError('Failed to fetch hotels: ' + (err.response?.data?.error || err.message));
         } finally {
             setLoading(false);
         }
@@ -51,7 +53,7 @@ export default function Home() {
             try {
                 const token = localStorage.getItem('adminToken');
                 await axios.delete(
-                    `https://your-firebase-db.firebaseio.com/hotels/${hotelId}.json?auth=${token}`
+                    `${FIREBASE_DB_URL}/hotels/${hotelId}.json?auth=${token}`
                 );
                 setHotels(hotels.filter(h => h.id !== hotelId));
             } catch (err) {

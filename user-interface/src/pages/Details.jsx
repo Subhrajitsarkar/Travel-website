@@ -13,6 +13,7 @@ export default function Details() {
     const [showBookingModal, setShowBookingModal] = useState(false);
     const [imageIndex, setImageIndex] = useState(0);
     const navigate = useNavigate();
+    const FIREBASE_DB_URL = import.meta.env.VITE_FIREBASE_DB_URL;
 
     useEffect(() => {
         const token = localStorage.getItem('userToken');
@@ -27,7 +28,7 @@ export default function Details() {
         try {
             const token = localStorage.getItem('userToken');
             const response = await fetch(
-                `https://travel-website-a0b2d-default-rtdb.firebaseio.com/hotels/${id}.json?auth=${token}`
+                `${FIREBASE_DB_URL}/hotels/${id}.json?auth=${token}`
             );
             const data = await response.json();
             if (data) {

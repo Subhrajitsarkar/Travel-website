@@ -22,6 +22,7 @@ export default function ManageListings() {
     const [loading, setLoading] = useState(false);
     const [editingId, setEditingId] = useState(null);
     const navigate = useNavigate();
+    const FIREBASE_DB_URL = import.meta.env.VITE_FIREBASE_DB_URL;
 
     useEffect(() => {
         const token = localStorage.getItem('adminToken');
@@ -37,11 +38,11 @@ export default function ManageListings() {
         try {
             const token = localStorage.getItem('adminToken');
             const response = await axios.get(
-                'https://your-firebase-db.firebaseio.com/hotels.json?auth=' + token
+                `${FIREBASE_DB_URL}/hotels.json?auth=${token}`
             );
             setHotels(response.data ? Object.entries(response.data).map(([key, val]) => ({ id: key, ...val })) : []);
         } catch (err) {
-            console.error('Failed to fetch hotels');
+            console.error('Firebase Error:', err.response?.data || err.message);
         }
     };
 
@@ -49,7 +50,7 @@ export default function ManageListings() {
         try {
             const token = localStorage.getItem('adminToken');
             const response = await axios.get(
-                'https://your-firebase-db.firebaseio.com/categories.json?auth=' + token
+                `${FIREBASE_DB_URL}/categories.json?auth=${token}`
             );
             if (response.data) {
                 setCategories(Object.values(response.data));
@@ -101,13 +102,13 @@ export default function ManageListings() {
 
             if (editingId) {
                 await axios.patch(
-                    `https://your-firebase-db.firebaseio.com/hotels/${editingId}.json?auth=${token}`,
+                    `${FIREBASE_DB_URL}/hotels/${editingId}.json?auth=${token}`,
                     payload
                 );
                 alert('Hotel updated successfully!');
             } else {
                 await axios.post(
-                    `https://your-firebase-db.firebaseio.com/hotels.json?auth=${token}`,
+                    `${FIREBASE_DB_URL}/hotels.json?auth=${token}`,
                     payload
                 );
                 alert('Hotel added successfully!');
@@ -129,7 +130,7 @@ export default function ManageListings() {
         try {
             const token = localStorage.getItem('adminToken');
             await axios.post(
-                `https://your-firebase-db.firebaseio.com/categories.json?auth=${token}`,
+                `${FIREBASE_DB_URL}/categories.json?auth=${token}`,
                 { name: newCategory }
             );
             setCategories([...categories, newCategory]);
@@ -151,7 +152,7 @@ export default function ManageListings() {
             try {
                 const token = localStorage.getItem('adminToken');
                 await axios.delete(
-                    `https://your-firebase-db.firebaseio.com/hotels/${hotelId}.json?auth=${token}`
+                    `${FIREBASE_DB_URL}/hotels/${hotelId}.json?auth=${token}`
                 );
                 fetchHotels();
             } catch (err) {

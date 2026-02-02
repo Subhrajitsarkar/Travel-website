@@ -10,6 +10,7 @@ export default function OrderHistory() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const FIREBASE_DB_URL = import.meta.env.VITE_FIREBASE_DB_URL;
 
     useEffect(() => {
         const token = localStorage.getItem('userToken');
@@ -24,7 +25,7 @@ export default function OrderHistory() {
     const fetchBookings = async (userEmail, token) => {
         try {
             const response = await axios.get(
-                'https://your-firebase-db.firebaseio.com/bookings.json?auth=' + token
+                `${FIREBASE_DB_URL}/bookings.json?auth=${token}`
             );
             if (response.data) {
                 const userBookings = Object.entries(response.data)

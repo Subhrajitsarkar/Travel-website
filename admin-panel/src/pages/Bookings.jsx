@@ -8,6 +8,7 @@ export default function Bookings() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const FIREBASE_DB_URL = import.meta.env.VITE_FIREBASE_DB_URL;
 
     useEffect(() => {
         const token = localStorage.getItem('adminToken');
@@ -21,12 +22,14 @@ export default function Bookings() {
     const fetchBookings = async () => {
         try {
             const token = localStorage.getItem('adminToken');
+            console.log('Fetching bookings with token:', token);
             const response = await axios.get(
-                'https://travel-website-a0b2d-default-rtdb.firebaseio.com/bookings.json?auth=' + token
+                `${FIREBASE_DB_URL}/bookings.json?auth=${token}`
             );
             setBookings(response.data ? Object.entries(response.data).map(([key, val]) => ({ id: key, ...val })) : []);
         } catch (err) {
-            setError('Failed to fetch bookings');
+            console.error('Firebase Bookings Error:', err.response?.data || err.message);
+            setError('Failed to fetch bookings: ' + (err.response?.data?.error || err.message));
         } finally {
             setLoading(false);
         }
@@ -36,7 +39,7 @@ export default function Bookings() {
         try {
             const token = localStorage.getItem('adminToken');
             await axios.patch(
-                `https://travel-website-a0b2d-default-rtdb.firebaseio.com/bookings/${bookingId}.json?auth=${token}`,
+                `${FIREBASE_DB_URL}/bookings/${bookingId}.json?auth=${token}`,
                 { status: 'completed' }
             );
             fetchBookings();
@@ -49,7 +52,7 @@ export default function Bookings() {
         try {
             const token = localStorage.getItem('adminToken');
             await axios.patch(
-                `https://travel-website-a0b2d-default-rtdb.firebaseio.com/bookings/${bookingId}.json?auth=${token}`,
+                `${FIREBASE_DB_URL}/bookings/${bookingId}.json?auth=${token}`,
                 { status: 'rejected' }
             );
             fetchBookings();
